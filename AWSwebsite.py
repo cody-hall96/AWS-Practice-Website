@@ -1,0 +1,26 @@
+from random import randint
+import boto3
+from flask import Flask, redirect, url_for, render_template, request
+
+#DynamoDB table name
+table_name = "Fortunes"
+
+#DynamoDB client
+dynamodb = boto3.resource("dynamodb")
+table = dynamodb.Table("Fortunes")
+
+app = Flask(__name__)
+
+@app.route("/", methods=["GET"])
+def get():
+    Fortune = table.get_item(
+        Key = {
+            "Fortune":"You will prosper!",
+            "ID":randint(0,5)
+        }
+    )["Item"]["Fortune"]
+    return render_template("index.html", Fortune=Fortune)
+    
+
+if __name__ == "__main__":
+    app.run()
