@@ -7,7 +7,7 @@ table_name = "Fortunes"
 
 #DynamoDB client
 
-dynamodb = boto3.resource("dynamodb", region_name="ca-central-1").Table("Fortunes")
+dynamodb = boto3.resource("dynamodb", region_name="ca-central-1")
 table = dynamodb.Table("Fortunes")
 
 app = Flask(__name__)
