@@ -6,7 +6,7 @@ from flask import Flask, redirect, url_for, render_template, request
 table_name = "Fortunes"
 
 #DynamoDB client
-dynamodb = boto3.resource("dynamodb")
+dynamodb = boto3.resource("dynamodb", region_name="ca-central-1")
 table = dynamodb.Table("Fortunes")
 
 app = Flask(__name__)
@@ -16,11 +16,11 @@ def get():
     Fortune = table.get_item(
         Key = {
             "Fortune":"You will prosper!",
-            "ID":randint(0,5)
+            "ID":2
         }
     )["Item"]["Fortune"]
     return render_template("index.html", Fortune=Fortune)
     
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host=:"0.0.0.0",port=80)
