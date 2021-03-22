@@ -6,7 +6,8 @@ from flask import Flask, redirect, url_for, render_template, request
 table_name = "Fortunes"
 
 #DynamoDB client
-dynamodb = boto3.resource("dynamodb", region_name="ca-central-1")
+client = boto3.client("dynamodb")
+dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("Fortunes")
 
 app = Flask(__name__)
